@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-descriptor name="lift-archetype-jpa-basic">
+  <requiredProperties>
+    <requiredProperty key="scalaVersion">
+      <defaultValue>${scala.version}</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="liftVersion">
+      <defaultValue>${lift.version}</defaultValue>
+    </requiredProperty>
+  </requiredProperties>
+  <fileSets>
+    <fileSet encoding="UTF-8" filtered="true">
+      <directory/>
+      <includes>
+        <include>README</include>
+      </includes>
+    </fileSet>
+    <!-- Place persistence XML files -->
+    <fileSet encoding="UTF-8" filtered="true" packaged="false">
+      <directory>src/main/resources/META-INF</directory>
+      <includes>
+        <include>persistence.xml</include>
+        <include>orm.xml</include>
+      </includes>
+    </fileSet>
+    <!-- properly place Boot.scala -->
+    <fileSet encoding="UTF-8" filtered="true" packaged="false">
+      <directory>src/main/scala/bootstrap/liftweb</directory>
+      <includes>
+        <include>Boot.scala</include>
+      </includes>
+    </fileSet>
+    <fileSet encoding="UTF-8" filtered="true" packaged="true">
+      <directory>src/main/scala/</directory>
+      <includes>
+        <include>**/*.scala</include>
+      </includes>
+      <excludes>
+        <exclude>**/Boot.scala</exclude>
+      </excludes>
+    </fileSet>
+    <!-- place templates -->
+    <fileSet encoding="UTF-8" filtered="false" packaged="false">
+      <directory>src/main/webapp</directory>
+      <includes>
+        <include>**/*</include>
+        <include>templates-hidden/*</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+</archetype-descriptor>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  #set($scala_version_unevaled = '\${scala.version}')
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>$groupId</groupId>
+  <artifactId>$artifactId</artifactId>
+  <version>$version</version>
+  <name>$artifactId Master</name>
+  <packaging>pom</packaging>
+  <inceptionYear>2009</inceptionYear>
+  <properties>
+    <scala.version>$scalaVersion</scala.version>
+  </properties>
+
+  <!-- Set up repo for ScalaJPA -->
+  <repositories>
+    <repository>
+      <id>scala-tools.releases</id>
+      <name>Scala-Tools Maven2 Repository for Releases</name>
+      <url>http://scala-tools.org/repo-releases</url>
+    </repository>
+#if ($liftVersion.endsWith("SNAPSHOT"))
+    <repository>
+      <id>scala-tools.snapshots</id>
+      <name>Scala-Tools Maven2 Repository for Snapshots</name>
+      <url>http://scala-tools.org/repo-snapshots</url>
+    </repository>
+#end
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>scala-tools.org</id>
+      <name>Scala-Tools Maven2 Repository</name>
+      <url>http://scala-tools.org/repo-releases</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <!-- Master properties (inherited by modules) -->
+  <dependencies>
+    <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala-library</artifactId>
+      <version>$scala_version_unevaled</version>
+    </dependency>
+    <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala-compiler</artifactId>
+      <version>$scala_version_unevaled</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.derby</groupId>
+      <artifactId>derby</artifactId>
+      <version>10.4.2.0</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.5</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <sourceDirectory>src/main/scala</sourceDirectory>
+    <testSourceDirectory>src/test/scala</testSourceDirectory>
+    <plugins>
+      <plugin>
+        <groupId>org.scala-tools</groupId>
+        <artifactId>maven-scala-plugin</artifactId>
+        <version>2.12.2</version>
+        <executions>
+          <execution>
+            <id>scala-compile</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>scala-testCompile</id>
+            <phase>process-test-resources</phase>
+            <goals>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <jvmArgs>
+            <jvmArg>-Xmx1024m</jvmArg>
+          </jvmArgs>
+          <args>
+            <!-- arg>-unchecked</arg -->
+            <arg>-deprecation</arg>
+            <arg>-Xno-varargs-conversion</arg>
+          </args>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <redirectTestOutputToFile>true</redirectTestOutputToFile>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-idea-plugin</artifactId>
+        <configuration>
+          <downloadSources>true</downloadSources>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-eclipse-plugin</artifactId>
+        <configuration>
+          <downloadSources>true</downloadSources>
+          <excludes>
+            <exclude>org.scala-lang:scala-library</exclude>
+          </excludes>
+          <classpathContainers>
+            <classpathContainer>ch.epfl.lamp.sdt.launching.SCALA_CONTAINER</classpathContainer>
+          </classpathContainers>
+          <projectnatures>
+            <java.lang.String>ch.epfl.lamp.sdt.core.scalanature</java.lang.String>
+            <java.lang.String>org.eclipse.jdt.core.javanature</java.lang.String>
+          </projectnatures>
+          <buildcommands>
+            <java.lang.String>ch.epfl.lamp.sdt.core.scalabuilder</java.lang.String>
+          </buildcommands>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.scala-tools</groupId>
+        <artifactId>maven-scala-plugin</artifactId>
+        <version>2.12.2</version>
+      </plugin>
+    </plugins>
+  </reporting>
+</project>

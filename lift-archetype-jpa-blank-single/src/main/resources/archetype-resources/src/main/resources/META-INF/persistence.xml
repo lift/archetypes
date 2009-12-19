@@ -1,0 +1,34 @@
+<persistence>
+  <!-- The following configuration is left as a placeholder. Please
+       replace with your own config 
+       There are several options. First, a local EM using Hibernate: -->
+   <persistence-unit name="jpaweb" transaction-type="RESOURCE_LOCAL">
+     <provider>org.hibernate.ejb.HibernatePersistence</provider>
+      <properties>
+         <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect"/>
+         <property name="hibernate.connection.driver_class" value="org.apache.derby.jdbc.EmbeddedDriver"/>
+         <property name="hibernate.connection.url" value="jdbc:derby:lift_example;create=true"/>
+         <property name="hibernate.max_fetch_depth" value="3"/>
+         <property name="hibernate.show_sql" value="true" />
+         <property name="hibernate.hbm2ddl.auto" value="update" />
+      </properties>
+   </persistence-unit>
+   <!-- Next, a JNDI-defined EM with JTA -->
+   <persistence-unit name="jpaweb" transaction-type="JTA">
+     <jta-data-source>java:/DefaultDS</jta-data-source><!-- configure to match your DS config -->
+   </persistence-unit>
+   <!-- TopLink -->
+   <persistence-unit name="jpaweb" transaction-type="RESOURCE_LOCAL">
+     <provider>oracle.toplink.essentials.ejb.cmp3.EntityManagerFactoryProvider</provider>
+     <properties>
+       <!-- Provider-specific connection properties -->
+       <property name="toplink.jdbc.driver" value="<database driver>"/>
+       <property name="toplink.jdbc.url" value="<database url>"/>
+       <property name="toplink.jdbc.user" value="<user>"/>
+       <property name="toplink.jdbc.password" value="<password>"/>
+       <!-- Provider-specific settings -->
+       <property name="toplink.logging.level" value="INFO"/>
+     </properties> 
+   </persistence-unit>
+
+</persistence>
