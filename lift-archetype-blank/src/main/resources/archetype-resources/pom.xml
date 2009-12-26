@@ -4,7 +4,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   #set($scala_version_unevaled = '\${scala.version}')
-  #set($project_basedir_unevaled = '\${project.basedir}')
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>$groupId</groupId>
@@ -75,8 +74,8 @@
   </dependencies>
 
   <build>
-    <sourceDirectory>$project_basedir_unevaled/src/main/scala</sourceDirectory>
-    <testSourceDirectory>$project_basedir_unevaled/src/test/scala</testSourceDirectory>
+    <sourceDirectory>src/main/scala</sourceDirectory>
+    <testSourceDirectory>src/test/scala</testSourceDirectory>
     <plugins>
       <plugin>
         <groupId>org.scala-tools</groupId>
