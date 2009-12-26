@@ -91,21 +91,12 @@
          <plugin>
            <groupId>org.apache.maven.plugins</groupId>
            <artifactId>maven-invoker-plugin</artifactId>
-           <version>1.5</version>
            <configuration>
-             <!--<debug>true</debug>-->
-             <streamLogs>true</streamLogs>
              <!--<localRepositoryPath>${project.build.directory}/it-repo</localRepositoryPath>-->
              <!--<settingsFile>${project.basedir}/src/it/settings.xml</settingsFile>-->
-             <!--<setupIncludes>-->
-               <!--<setupInclude>sample</setupInclude>-->
-             <!--</setupIncludes>-->
              <pomIncludes>
                <pomInclude>sample</pomInclude>
-               <!--<pomInclude>sample/sample-project/pom.xml</pomInclude>-->
-               <!--<pomInclude>sample</pomInclude>-->
              </pomIncludes>
-             <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
              <properties>
                <archetypeCatalog>local</archetypeCatalog>
                <!--<archetypeRepository>local</archetypeRepository>-->
