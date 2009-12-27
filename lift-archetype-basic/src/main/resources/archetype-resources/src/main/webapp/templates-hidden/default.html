@@ -4,7 +4,7 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     
-    <title>Lift Web Framework</title>
+		<title>$groupId:$artifactId:$version</title>
     <lift:CSS.blueprint />
     <lift:CSS.fancyType />
     <script id="jquery" src="/classpath/jquery.js" type="text/javascript"/>
@@ -51,7 +51,7 @@
   <body>
     <div class="container">
       <div class="column span-12 last" style="text-align: right">
-        <h1 class="alt">${artifactId}<img alt="" id="ajax-loader" style="display:none; margin-bottom: 0px; margin-left: 5px" src="/images/ajax-loader.gif"/></h1>
+        <h1 class="alt">$artifactId<img alt="" id="ajax-loader" style="display:none; margin-bottom: 0px; margin-left: 5px" src="/images/ajax-loader.gif"/></h1>
       </div>
 
       <hr/>
@@ -72,8 +72,8 @@
       <hr />
       <div class="column span-23 last" style="text-align: center">
         <h4 class="alt">
-          <a href="http://liftweb.net"><i>Lift</i></a> 
-	  is Copyright 2007-2009 WorldWide Conferencing, LLC.  Distributed under an Apache 2.0 License.</h4>
+          <a href="${project.organization.url}"><i>Lift</i></a> 
+	        is Copyright 2007-2009 ${project.organization.name}.  Distributed under an Apache 2.0 License.</h4>
       </div>
       
     </div>
