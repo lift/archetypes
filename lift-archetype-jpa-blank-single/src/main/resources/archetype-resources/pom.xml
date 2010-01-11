@@ -11,7 +11,7 @@
   <version>$version</version>
   <packaging>war</packaging>
   <name>$artifactId Project</name>
-  <inceptionYear>2009</inceptionYear>
+  <inceptionYear>2010</inceptionYear>
   <properties>
     <scala.version>$scalaVersion</scala.version>
   </properties>
