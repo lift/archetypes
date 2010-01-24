@@ -57,10 +57,11 @@
   -->
   <modules>
     <module>lift-archetype-blank</module>
-    <module>lift-archetype-basic</module>
-    <module>lift-archetype-jpa-blank-single</module>
-    <module>lift-archetype-jpa-blank</module>
-    <module>lift-archetype-jpa-basic</module>
+    <!--FIXME: 280-->
+    <!--<module>lift-archetype-basic</module>-->
+    <!--<module>lift-archetype-jpa-blank-single</module>-->
+    <!--<module>lift-archetype-jpa-blank</module>-->
+    <!--<module>lift-archetype-jpa-basic</module>-->
   </modules>
 
   <!--
