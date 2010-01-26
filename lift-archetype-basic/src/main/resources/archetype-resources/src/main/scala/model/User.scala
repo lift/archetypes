@@ -1,4 +1,5 @@
-package ${package}.model
+package ${package} {
+package model {
 
 import _root_.net.liftweb.mapper._
 import _root_.net.liftweb.util._
@@ -31,4 +32,7 @@ class User extends MegaProtoUser[User] {
     override def textareaCols = 50
     override def displayName = "Personal Essay"
   }
+}
+
+}
 }

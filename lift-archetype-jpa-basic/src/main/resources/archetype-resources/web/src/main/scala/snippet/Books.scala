@@ -13,7 +13,8 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ${package}.snippet
+package ${package} {
+package snippet {
 
 import _root_.java.text.{ParseException,SimpleDateFormat}
 
@@ -114,4 +115,6 @@ class BookOps {
 	 "title" -> SHtml.text(title, title = _),
 	 "run" -> SHtml.submit(?("Search"), doSearch _))
   }
+}
+}
 }

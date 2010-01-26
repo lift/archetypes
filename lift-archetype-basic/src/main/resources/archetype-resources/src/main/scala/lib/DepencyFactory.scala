@@ -1,4 +1,5 @@
-package ${package}.lib
+package ${package} {
+package lib {
 
 import net.liftweb._
 import http._
@@ -52,3 +53,5 @@ sealed abstract class Changer {
   }
 }
 */
+}
+}

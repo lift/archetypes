@@ -1,4 +1,5 @@
-package ${package}.snippet
+package ${package} {
+package snippet {
 
 import _root_.scala.xml.NodeSeq
 import _root_.net.liftweb.util.Helpers
@@ -9,3 +10,5 @@ class HelloWorld {
     Helpers.bind("b", in, "time" -> (new _root_.java.util.Date).toString)
 }
 
+}
+}
