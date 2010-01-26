@@ -13,7 +13,8 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ${package}.model
+package ${package} {
+package model {
 
 /* adds a valueOf function, assumes name is defined
 add optional description */
@@ -40,4 +41,6 @@ trait Enumv  {
 
   /* get name description pair list for forms */
   def getNameDescriptionList =  this.elements.toList.map(v => (v.toString, getDescriptionOrName(v) ) ).toList
+}
+}
 }

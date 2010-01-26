@@ -13,7 +13,8 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ${package}.model
+package ${package} {
+package model {
 
 import _root_.java.util.Currency
 import _root_.java.util.Locale
@@ -66,3 +67,5 @@ abstract class CurrencyZone {
   val CurrencyUnit: Currency
 }
 
+}
+}

@@ -1,4 +1,5 @@
-package ${package}.snippet
+package ${package} {
+package snippet {
 
 import _root_.scala.xml.{NodeSeq, Text}
 import _root_.net.liftweb.util._
@@ -20,4 +21,5 @@ class HelloWorld {
    */
 }
 
-
+}
+}

@@ -13,7 +13,8 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ${package}.model
+package ${package} {
+package model {
 
 import _root_.java.io.Serializable
 import _root_.java.sql.PreparedStatement
@@ -70,4 +71,6 @@ abstract class EnumvType(val et: Enumeration with Enumv) extends UserType {
 
 }
 
+}
+}
 
