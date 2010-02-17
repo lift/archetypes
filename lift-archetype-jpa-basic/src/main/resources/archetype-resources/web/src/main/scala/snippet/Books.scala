@@ -112,7 +112,7 @@ class BookOps {
     }
 
     bind("search", xhtml,
-	 "title" -> SHtml.text(title, title = _),
+	 "title" -> SHtml.text(title, x => title = x),
 	 "run" -> SHtml.submit(?("Search"), doSearch _))
   }
 }
