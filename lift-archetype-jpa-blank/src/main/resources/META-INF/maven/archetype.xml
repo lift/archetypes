@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype>
+  <id>lift-archetype-jpa-blank</id>
+  <sources/>
+  <resources>
+    <resource>use-archetype-generate.txt</resource>
+  </resources>
+</archetype>
