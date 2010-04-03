@@ -30,7 +30,7 @@ import _root_.javax.persistence.{EntityExistsException,PersistenceException}
 import ${package}.model._
 import Model._
 
-class AuthorOps {
+class AuthorOps extends Loggable {
   def list (xhtml : NodeSeq) : NodeSeq = {
     val authors = Model.createNamedQuery[Author]("findAllAuthors").getResultList()
 
@@ -57,7 +57,7 @@ class AuthorOps {
 	  redirectTo("list.html")
 	} catch {
 	  case ee : EntityExistsException => error("Author already exists")
-	  case pe : PersistenceException => error("Error adding author"); Log.error("Error adding author", pe)
+	  case pe : PersistenceException => error("Error adding author"); logger.error("Error adding author", pe)
 	}
       }
     }
