@@ -65,8 +65,10 @@
     </dependency>
     <dependency>
       <groupId>org.scala-tools.testing</groupId>
+      <!--FIXME: 280-->
+      <!--<artifactId>specs_${scala.version}</artifactId>-->
       <artifactId>specs_2.8.0.Beta1</artifactId>
-      <version>1.6.2</version>
+      <version>1.6.5-SNAPSHOT</version>
       <scope>test</scope>
     </dependency>
     <dependency>
