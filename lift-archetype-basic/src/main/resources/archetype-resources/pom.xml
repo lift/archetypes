@@ -108,6 +108,7 @@
           <charset>${project.build.sourceEncoding}</charset>
           <jvmArgs>
             <jvmArg>-Xmx1024m</jvmArg>
+            <jvmArg>-DpackageLinkDefs=file://${project.build.directory}/packageLinkDefs.properties</jvmArg>
           </jvmArgs>
         </configuration>
         <executions>
@@ -204,6 +205,13 @@
         <groupId>org.scala-tools</groupId>
         <artifactId>maven-scala-plugin</artifactId>
         <version>2.13.1</version>
+        <configuration>
+          <charset>${project.build.sourceEncoding}</charset>
+          <jvmArgs>
+            <jvmArg>-Xmx1024m</jvmArg>
+            <jvmArg>-DpackageLinkDefs=file://${project.build.directory}/packageLinkDefs.properties</jvmArg>
+          </jvmArgs>
+        </configuration>
       </plugin>
     </plugins>
   </reporting>
