@@ -82,64 +82,46 @@
     ~ Build Settings
   -->
   <build>
-     <pluginManagement>
-       <plugins>
-         <plugin>
-           <groupId>org.apache.maven.plugins</groupId>
-           <artifactId>maven-invoker-plugin</artifactId>
-           <configuration>
-             <!--<localRepositoryPath>${project.build.directory}/it-repo</localRepositoryPath>-->
-             <!--<settingsFile>${project.basedir}/src/it/settings.xml</settingsFile>-->
-             <pomIncludes>
-               <pomInclude>sample</pomInclude>
-             </pomIncludes>
-             <properties>
-               <archetypeCatalog>local</archetypeCatalog>
-               <!--<archetypeRepository>local</archetypeRepository>-->
-               <archetypeRepository>${settings.localRepository}</archetypeRepository>
-               <archetypeGroupId>${project.groupId}</archetypeGroupId>
-               <archetypeArtifactId>${project.artifactId}</archetypeArtifactId>
-               <archetypeVersion>${project.version}</archetypeVersion>
-               <!--<scalaVersion>${scala.version}</scalaVersion>-->
-               <!--<liftVersion>${project.version}</liftVersion>-->
-               <groupId>test</groupId>
-               <artifactId>sample-project</artifactId>
-               <version>0.1</version>
-               <!--<package>test</package>-->
-             </properties>
-           </configuration>
-           <executions>
-             <execution>
-               <goals>
-                 <goal>install</goal>
-                 <goal>run</goal>
-               </goals>
-             </execution>
-           </executions>
-         </plugin>
+    <pluginManagement>
+      <plugins>
         <plugin>
-          <groupId>org.apache.rat</groupId>
-          <artifactId>apache-rat-plugin</artifactId>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-invoker-plugin</artifactId>
           <configuration>
-            <excludes>
-              <exclude>*.log</exclude>
-              <exclude>**/packageLinkDefs.properties</exclude>
-            </excludes>
+            <!--<localRepositoryPath>${project.build.directory}/it-repo</localRepositoryPath>-->
+            <!--<settingsFile>${project.basedir}/src/it/settings.xml</settingsFile>-->
+            <pomIncludes>
+              <pomInclude>sample</pomInclude>
+            </pomIncludes>
+            <properties>
+              <archetypeCatalog>local</archetypeCatalog>
+              <!--<archetypeRepository>local</archetypeRepository>-->
+              <archetypeRepository>${settings.localRepository}</archetypeRepository>
+              <archetypeGroupId>${project.groupId}</archetypeGroupId>
+              <archetypeArtifactId>${project.artifactId}</archetypeArtifactId>
+              <archetypeVersion>${project.version}</archetypeVersion>
+              <!--<scalaVersion>${scala.version}</scalaVersion>-->
+              <!--<liftVersion>${project.version}</liftVersion>-->
+              <groupId>test</groupId>
+              <artifactId>sample-project</artifactId>
+              <version>0.1</version>
+              <!--<package>test</package>-->
+            </properties>
           </configuration>
           <executions>
             <execution>
               <goals>
-                <goal>check</goal>
+                <goal>install</goal>
+                <goal>run</goal>
               </goals>
             </execution>
           </executions>
         </plugin>
-
-       </plugins>
-     </pluginManagement>
-        <plugins>
+      </plugins>
+    </pluginManagement>
+    <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
+      <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-changes-plugin</artifactId>
       </plugin>
       <plugin>
@@ -169,18 +151,6 @@
   <!--
     ~ Profile Settings
   -->
-  <profiles>
-    <profile>
-      <id>lift-debug</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.rat</groupId>
-            <artifactId>apache-rat-plugin</artifactId>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
+  <!-- <profiles/> -->
 
 </project>
