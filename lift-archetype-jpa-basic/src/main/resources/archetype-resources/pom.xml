@@ -14,6 +14,17 @@
   <inceptionYear>2010</inceptionYear>
   <properties>
     <scala.version>$scalaVersion</scala.version>
+    <!-- Common plugin settings -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
+    <!-- vscaladoc settings -->
+    <maven.scaladoc.vscaladocVersion>1.2-SNAPSHOT</maven.scaladoc.vscaladocVersion>
+    <vscaladoc.links.liftweb.pathsufix>scaladocs/</vscaladoc.links.liftweb.pathsufix>
+#if ($liftVersion.endsWith("SNAPSHOT"))
+    <vscaladoc.links.liftweb.baseurl>http://scala-tools.org/mvnsites-snapshots/liftweb</vscaladoc.links.liftweb.baseurl>
+#else
+    <vscaladoc.links.liftweb.baseurl>http://scala-tools.org/mvnsites/liftweb</vscaladoc.links.liftweb.baseurl>
+#end
   </properties>
 
   <!-- Set up repo for ScalaJPA -->
@@ -75,6 +86,18 @@
         <groupId>org.scala-tools</groupId>
         <artifactId>maven-scala-plugin</artifactId>
         <version>2.13.1</version>
+        <configuration>
+          <charset>${project.build.sourceEncoding}</charset>
+          <jvmArgs>
+            <jvmArg>-Xmx1024m</jvmArg>
+            <jvmArg>-DpackageLinkDefs=file://${project.build.directory}/packageLinkDefs.properties</jvmArg>
+          </jvmArgs>
+          <args>
+            <!-- arg>-unchecked</arg -->
+            <arg>-deprecation</arg>
+            <arg>-Xno-varargs-conversion</arg>
+          </args>
+        </configuration>
         <executions>
           <execution>
             <goals>
@@ -83,16 +106,33 @@
             </goals>
           </execution>
         </executions>
-        <configuration>
-          <jvmArgs>
-            <jvmArg>-Xmx1024m</jvmArg>
-          </jvmArgs>
-          <args>
-            <!-- arg>-unchecked</arg -->
-            <arg>-deprecation</arg>
-            <arg>-Xno-varargs-conversion</arg>
-          </args>
-        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.4.2</version>
+        <executions>
+          <execution>
+            <id>default-copy-resources</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <overwrite>true</overwrite>
+              <outputDirectory>${project.build.directory}</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${project.basedir}/src</directory>
+                  <includes>
+                    <include>packageLinkDefs.properties</include>
+                  </includes>
+                  <filtering>true</filtering>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
@@ -134,6 +174,13 @@
         <groupId>org.scala-tools</groupId>
         <artifactId>maven-scala-plugin</artifactId>
         <version>2.13.1</version>
+        <configuration>
+          <charset>${project.build.sourceEncoding}</charset>
+          <jvmArgs>
+            <jvmArg>-Xmx1024m</jvmArg>
+            <jvmArg>-DpackageLinkDefs=file://${project.build.directory}/packageLinkDefs.properties</jvmArg>
+          </jvmArgs>
+        </configuration>
       </plugin>
     </plugins>
   </reporting>

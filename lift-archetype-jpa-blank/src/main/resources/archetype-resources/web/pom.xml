@@ -15,7 +15,6 @@
     <groupId>$groupId</groupId>
     <artifactId>$artifactId</artifactId>
     <version>$version</version>
-    <relativePath>../pom.xml</relativePath>
   </parent>
 
   <artifactId>$artifactId$web_suffix</artifactId>
