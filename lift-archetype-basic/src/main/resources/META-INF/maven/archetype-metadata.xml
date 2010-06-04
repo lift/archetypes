@@ -9,6 +9,12 @@
     </requiredProperty>
   </requiredProperties>
   <fileSets>
+    <fileSet encoding="UTF-8" filtered="false">
+      <directory>src</directory>
+      <includes>
+        <include>packageLinkDefs.properties</include>
+      </includes>
+    </fileSet>
     <fileSet encoding="UTF-8" filtered="true">
       <directory>src/main/resources</directory>
     </fileSet>
