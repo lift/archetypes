@@ -4,6 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   #set($scala_version_unevaled = '\${scala.version}')
+  #set($project_basedir = '\${project.basedir}')
+  #set($project_build_sourceEncoding_unevaled = '\${project.build.sourceEncoding}')
+  #set($project_build_directory_unevaled = '\${project.build.directory}')
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>$groupId</groupId>
@@ -16,7 +19,7 @@
     <scala.version>$scalaVersion</scala.version>
     <!-- Common plugin settings -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
+    <project.reporting.outputEncoding>$project_build_sourceEncoding_unevaled</project.reporting.outputEncoding>
     <!-- vscaladoc settings -->
     <maven.scaladoc.vscaladocVersion>1.2-SNAPSHOT</maven.scaladoc.vscaladocVersion>
     <vscaladoc.links.liftweb.pathsufix>scaladocs/</vscaladoc.links.liftweb.pathsufix>
@@ -128,10 +131,10 @@
         <artifactId>maven-scala-plugin</artifactId>
         <version>2.13.1</version>
         <configuration>
-          <charset>${project.build.sourceEncoding}</charset>
+          <charset>$project_build_sourceEncoding_unevaled</charset>
           <jvmArgs>
             <jvmArg>-Xmx1024m</jvmArg>
-            <jvmArg>-DpackageLinkDefs=file://${project.build.directory}/packageLinkDefs.properties</jvmArg>
+            <jvmArg>-DpackageLinkDefs=file://$project_build_directory_unevaled/packageLinkDefs.properties</jvmArg>
           </jvmArgs>
           <args>
             <!-- arg>-unchecked</arg -->
@@ -161,10 +164,10 @@
             </goals>
             <configuration>
               <overwrite>true</overwrite>
-              <outputDirectory>${project.build.directory}</outputDirectory>
+              <outputDirectory>$project_build_directory_unevaled</outputDirectory>
               <resources>
                 <resource>
-                  <directory>${project.basedir}/src</directory>
+                  <directory>$project_basedir/src</directory>
                   <includes>
                     <include>packageLinkDefs.properties</include>
                   </includes>
@@ -246,10 +249,10 @@
         <artifactId>maven-scala-plugin</artifactId>
         <version>2.13.1</version>
         <configuration>
-          <charset>${project.build.sourceEncoding}</charset>
+          <charset>$project_build_sourceEncoding_unevaled</charset>
           <jvmArgs>
             <jvmArg>-Xmx1024m</jvmArg>
-            <jvmArg>-DpackageLinkDefs=file://${project.build.directory}/packageLinkDefs.properties</jvmArg>
+            <jvmArg>-DpackageLinkDefs=file://$project_build_directory_unevaled/packageLinkDefs.properties</jvmArg>
           </jvmArgs>
         </configuration>
       </plugin>
