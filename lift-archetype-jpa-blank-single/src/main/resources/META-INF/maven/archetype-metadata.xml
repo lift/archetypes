@@ -15,6 +15,12 @@
         <include>README</include>
       </includes>
     </fileSet>
+    <fileSet encoding="UTF-8" filtered="false">
+      <directory>src</directory>
+      <includes>
+        <include>packageLinkDefs.properties</include>
+      </includes>
+    </fileSet>
     <!-- Place persistence XML files -->
     <fileSet encoding="UTF-8" filtered="true" packaged="false">
       <directory>src/main/resources/META-INF</directory>
