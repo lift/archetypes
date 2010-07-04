@@ -57,7 +57,7 @@
   <dependencies>
     <dependency>
       <groupId>net.liftweb</groupId>
-      <artifactId>lift-mapper</artifactId>
+      <artifactId>lift-mapper_$scalaVersion</artifactId>
       <version>$liftVersion</version>
     </dependency>
     <dependency>

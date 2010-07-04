@@ -58,7 +58,7 @@
   <dependencies>
     <dependency>
       <groupId>net.liftweb</groupId>
-      <artifactId>lift-jpa</artifactId>
+      <artifactId>lift-jpa_$scalaVersion</artifactId>
       <version>$liftVersion</version>
     </dependency>
     <dependency>
