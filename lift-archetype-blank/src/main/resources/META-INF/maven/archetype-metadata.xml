@@ -9,6 +9,9 @@
     </requiredProperty>
   </requiredProperties>
   <fileSets>
+    <fileSet encoding="UTF-8" filtered="true">
+      <directory>project</directory>
+    </fileSet>
     <fileSet encoding="UTF-8" filtered="false">
       <directory>src</directory>
       <includes>
