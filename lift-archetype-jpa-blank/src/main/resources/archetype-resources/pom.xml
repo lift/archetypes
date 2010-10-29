@@ -68,6 +68,24 @@
       <version>$scala_version_unevaled</version>
       <scope>test</scope>
     </dependency>
+#if ($logBackend.equalsIgnoreCase("logback"))
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>0.9.26</version>
+    </dependency>
+#elseif ($logBackend.equalsIgnoreCase("log4j"))
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.16</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>1.6.1</version>
+    </dependency>
+#end
     <dependency>
       <groupId>org.apache.derby</groupId>
       <artifactId>derby</artifactId>
@@ -89,7 +107,7 @@
       <plugin>
         <groupId>org.scala-tools</groupId>
         <artifactId>maven-scala-plugin</artifactId>
-        <version>2.14</version>
+        <version>2.14.3</version>
         <configuration>
           <charset>$project_build_sourceEncoding_unevaled</charset>
           <jvmArgs>
@@ -176,7 +194,7 @@
       <plugin>
         <groupId>org.scala-tools</groupId>
         <artifactId>maven-scala-plugin</artifactId>
-        <version>2.14</version>
+        <version>2.14.3</version>
         <configuration>
           <charset>$project_build_sourceEncoding_unevaled</charset>
           <jvmArgs>

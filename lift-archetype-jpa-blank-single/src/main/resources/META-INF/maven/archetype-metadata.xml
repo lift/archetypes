@@ -7,6 +7,9 @@
     <requiredProperty key="liftVersion">
       <defaultValue>${lift.version}</defaultValue>
     </requiredProperty>
+    <requiredProperty key="logBackend">
+      <defaultValue>logback</defaultValue>
+    </requiredProperty>
   </requiredProperties>
   <fileSets>
     <fileSet encoding="UTF-8" filtered="true">
