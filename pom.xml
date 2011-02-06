@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-  ~ Copyright 2006-2010 WorldWide Conferencing, LLC
+  ~ Copyright 2006-2011 WorldWide Conferencing, LLC
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -33,13 +33,9 @@
   <!--
     ~ The Basics
   -->
-  <parent>
-    <groupId>net.liftweb</groupId>
-    <artifactId>lift-parent_2.8.1</artifactId>
-    <version>2.3-SNAPSHOT</version>
-    <relativePath>../resources/lift-parent/pom.xml</relativePath>
-  </parent>
+  <groupId>net.liftweb</groupId>
   <artifactId>archetypes_2.8.1</artifactId>
+  <version>2.3-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <!--
@@ -49,6 +45,20 @@
   <description>
     Standard archetypes for Lift Web Framework.
   </description>
+  <url>http://dev.liftweb.net</url>
+  <inceptionYear>2006</inceptionYear>
+  <organization>
+    <name>WorldWide Conferencing, LLC</name>
+    <url>http://www.liftweb.net</url>
+  </organization>
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+      <comments>Lift open source software is licensed under an Apache 2.0 license.</comments>
+    </license>
+  </licenses>
 
   <!--
     ~ Module Settings
@@ -65,12 +75,48 @@
   <!--
     ~ Environment Settings
   -->
+  <scm>
+    <connection>scm:git:git://github.com/lift/archetypes.git</connection>
+    <developerConnection>scm:git:git@github.com:lift/archetypes.git</developerConnection>
+    <url>http://github.com/lift/archetypes/tree/master</url>
+  </scm>
+  <issueManagement>
+    <system>assembla</system>
+    <url>http://www.assembla.com/spaces/liftweb/tickets/</url>
+  </issueManagement>
   <ciManagement>
     <system>hudson</system>
     <url>http://hudson.scala-tools.org/job/lift-archetypes/</url>
     <!-- <notifiers/> -->
   </ciManagement>
-  <!-- <properties/> -->
+  <distributionManagement>
+    <repository>
+      <id>nexus.scala-tools.org</id>
+      <name>Scala-Tools Distribution Repository for Releases</name>
+      <url>http://nexus.scala-tools.org/content/repositories/releases</url>
+    </repository>
+    <snapshotRepository>
+      <id>nexus.scala-tools.org</id>
+      <name>Scala-Tools Distribution Repository for Snapshots</name>
+      <url>http://nexus.scala-tools.org/content/repositories/snapshots</url>
+      <uniqueVersion>false</uniqueVersion>
+    </snapshotRepository>
+    <!-- Site omitted, each project/profile must provide their own -->
+    <!--<site />-->
+  </distributionManagement>
+  <properties>
+    <!-- Common plugin settings -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
+
+    <scala.version>2.8.1</scala.version>
+    <specs.version>1.6.6</specs.version>
+    <slf4j.version>1.6.1</slf4j.version>
+    <!-- Note: logback.version must be compatible with slf4j.version -->
+    <logback.version>0.9.26</logback.version>
+    <atomikos.version>3.2.3</atomikos.version>
+    <mongodb.javaDriver.version>2.4</mongodb.javaDriver.version>
+  </properties>
 
   <!--
     ~ Dependency Settings
@@ -88,6 +134,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-invoker-plugin</artifactId>
+          <version>1.5</version>
           <configuration>
             <!--<localRepositoryPath>${project.build.directory}/it-repo</localRepositoryPath>-->
             <!--<settingsFile>${project.basedir}/src/it/settings.xml</settingsFile>-->
@@ -95,6 +142,8 @@
               <pomInclude>sample</pomInclude>
             </pomIncludes>
             <properties>
+              <streamLogs>true</streamLogs>
+              <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
               <archetypeCatalog>local</archetypeCatalog>
               <!--<archetypeRepository>local</archetypeRepository>-->
               <archetypeRepository>${settings.localRepository}</archetypeRepository>
@@ -122,24 +171,38 @@
     </pluginManagement>
     <plugins>
       <plugin>
-      <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-changes-plugin</artifactId>
-      </plugin>
-      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
+        <version>1.0</version>
+        <configuration>
+          <rules>
+            <requireMavenVersion>
+              <version>[2.2.1,)</version>
+            </requireMavenVersion>
+          </rules>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
+        <version>2.4.3</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
+          <version>2.1.2</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>jar-no-fork</goal>
+              </goals>
+            </execution>
+          </executions>
       </plugin>
       <plugin>
         <groupId>org.scala-tools</groupId>
         <artifactId>maven-scala-plugin</artifactId>
+        <version>2.15.1</version>
       </plugin>
     </plugins>
   </build>
