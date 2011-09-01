@@ -36,6 +36,11 @@
       <name>Scala-Tools Dependencies Repository for Releases</name>
       <url>http://scala-tools.org/repo-releases</url>
     </repository>
+    <repository>
+      <id>java.net.maven2</id>
+      <name>java.net Maven2 Repository</name>
+      <url>http://download.java.net/maven/2/</url>
+    </repository>
 #if ($liftVersion.endsWith("SNAPSHOT"))
     <repository>
       <id>scala-tools.snapshots</id>
