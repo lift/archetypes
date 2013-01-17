@@ -1,14 +1,23 @@
-package ${package} {
-package snippet {
+package ${package}
+package snippet
 
-import _root_.scala.xml.NodeSeq
-import _root_.net.liftweb.util.Helpers
+import scala.xml.{NodeSeq, Text}
+import net.liftweb.util._
+import net.liftweb.common._
+import java.util.Date
+import code.lib._
 import Helpers._
 
 class HelloWorld {
-  def howdy(in: NodeSeq): NodeSeq =
-    Helpers.bind("b", in, "time" -> (new _root_.java.util.Date).toString)
+  lazy val date: Box[Date] = DependencyFactory.inject[Date] // inject the date
+
+  // replace the contents of the element with id "time" with the date
+  def howdy = "#time *" #> date.map(_.toString)
+
+  /*
+   lazy val date: Date = DependencyFactory.time.vend // create the date via factory
+
+   def howdy = "#time *" #> date.toString
+   */
 }
 
-}
-}
