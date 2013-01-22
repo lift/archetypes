@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   #set($scala_version_unevaled = '\${scala.version}')
@@ -24,9 +24,9 @@
     <maven.scaladoc.vscaladocVersion>1.2-m1</maven.scaladoc.vscaladocVersion>
     <vscaladoc.links.liftweb.pathsufix>scaladocs/</vscaladoc.links.liftweb.pathsufix>
 #if ($liftVersion.endsWith("SNAPSHOT"))
-    <vscaladoc.links.liftweb.baseurl>http://scala-tools.org/mvnsites-snapshots/liftweb</vscaladoc.links.liftweb.baseurl>
+    <vscaladoc.links.liftweb.baseurl>https://oss.sonatype.org/content/repositories/snapshots/liftweb</vscaladoc.links.liftweb.baseurl>
 #else
-    <vscaladoc.links.liftweb.baseurl>http://scala-tools.org/mvnsites/liftweb</vscaladoc.links.liftweb.baseurl>
+    <vscaladoc.links.liftweb.baseurl>https://oss.sonatype.org/content/groups/scala-tools/liftweb</vscaladoc.links.liftweb.baseurl>
 #end
   </properties>
 
@@ -35,7 +35,7 @@
     <repository>
       <id>scala-tools.releases</id>
       <name>Scala-Tools Dependencies Repository for Releases</name>
-      <url>http://scala-tools.org/repo-releases</url>
+      <url>https://oss.sonatype.org/content/groups/scala-tools</url>
     </repository>
     <repository>
       <id>java.net.maven2</id>
@@ -46,7 +46,7 @@
     <repository>
       <id>scala-tools.snapshots</id>
       <name>Scala-Tools Dependencies Repository for Snapshots</name>
-      <url>http://scala-tools.org/repo-snapshots</url>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
       <snapshots/>
     </repository>
 #end
@@ -56,7 +56,7 @@
     <pluginRepository>
       <id>scala-tools.releases</id>
       <name>Scala-Tools Plugins Repository for Releases</name>
-      <url>http://scala-tools.org/repo-releases</url>
+      <url>https://oss.sonatype.org/content/groups/scala-tools</url>
     </pluginRepository>
   </pluginRepositories>
 
@@ -69,24 +69,24 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>1.6.1</version>
+      <version>1.7.2</version>
     </dependency>
 #if ($logBackend.equalsIgnoreCase("logback"))
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>0.9.26</version>
+      <version>1.0.6</version>
     </dependency>
 #elseif ($logBackend.equalsIgnoreCase("log4j"))
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
-      <version>1.2.16</version>
+      <version>1.2.17</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
-      <version>1.6.1</version>
+      <version>1.7.2</version>
     </dependency>
 #end
     <dependency>
@@ -125,9 +125,9 @@
     </dependency>
     <!-- for LiftConsole -->
     <dependency>
-      <groupId>org.mortbay.jetty</groupId>
-      <artifactId>jetty</artifactId>
-      <version>6.1.25</version>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-webapp</artifactId>
+      <version>8.1.8.v20121106</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -139,7 +139,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.7</version>
+      <version>4.11</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -175,7 +175,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
-        <version>2.5</version>
+        <version>2.6</version>
         <executions>
           <execution>
             <id>default-copy-resources</id>
@@ -200,14 +200,14 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.mortbay.jetty</groupId>
-        <artifactId>maven-jetty-plugin</artifactId>
-        <version>6.1.25</version>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>9.0.0.M4</version>
         <configuration>
           <contextPath>/</contextPath>
           <scanIntervalSeconds>5</scanIntervalSeconds>
           <connectors>
-            <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+            <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
               <port>9090</port>
               <maxIdleTime>60000</maxIdleTime>
             </connector>
@@ -246,7 +246,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-eclipse-plugin</artifactId>
-        <version>2.7</version>
+        <version>2.9</version>
         <configuration>
           <downloadSources>true</downloadSources>
           <additionalProjectnatures>
