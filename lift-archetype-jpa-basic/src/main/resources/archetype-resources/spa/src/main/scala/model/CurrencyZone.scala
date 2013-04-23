@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ${package} {
-package model {
+package ${package}
+package model
 
-import _root_.java.util.Currency
-import _root_.java.util.Locale
-import _root_.java.text.NumberFormat
+import java.util.Currency
+import java.util.Locale
+import java.text.NumberFormat
 
 /* currency factory*/
 abstract class CurrencyZone {
@@ -61,11 +61,8 @@ abstract class CurrencyZone {
 
     def get: String = get(numberOfFractionDigits)
 
-    def get(numberOfFractionDigits: Int): String = format("", numberOfFractionDigits).replaceAll(",", "");
+    def get(numberOfFractionDigits: Int): String = format("", numberOfFractionDigits).replaceAll(",", "")
 
   }
   val CurrencyUnit: Currency
-}
-
-}
 }

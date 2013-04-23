@@ -12,7 +12,7 @@ import org.specs2.specification.AroundExample
 import org.specs2.execute.Result
 
 
-object HelloWorldTestSpecs extends Specification with AroundExample{
+object HelloWorldTestSpecs extends Specification with AroundExample {
   val session = new LiftSession("", randomString(20), Empty)
   val stableTime = now
 

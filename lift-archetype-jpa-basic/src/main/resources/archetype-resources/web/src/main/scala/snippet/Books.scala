@@ -13,20 +13,20 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ${package} {
-package snippet {
+package ${package}
+package snippet
 
-import _root_.java.text.{ParseException,SimpleDateFormat}
+import java.text.{ParseException,SimpleDateFormat}
 
-import _root_.scala.xml.{NodeSeq,Text}
+import scala.xml.{NodeSeq,Text}
 
-import _root_.net.liftweb.http.{RequestVar,S,SHtml}
-import _root_.net.liftweb.common.{Box,Empty,Full, Loggable}
-import _root_.net.liftweb.util.{Helpers}
+import net.liftweb.http.{RequestVar,S,SHtml}
+import net.liftweb.common.{Box,Empty,Full, Loggable}
+import net.liftweb.util.{Helpers}
 import S._
 import Helpers._
 
-import _root_.javax.persistence.{EntityExistsException,PersistenceException}
+import javax.persistence.{EntityExistsException,PersistenceException}
 
 import ${package}.model._
 import Model._
@@ -59,9 +59,9 @@ class BookOps extends Loggable {
   // Utility methods for processing a submitted form
   def is_valid_Book_? (toCheck : Book) : Boolean =
     List((if (toCheck.title.length == 0) { S.error("You must provide a title"); false } else true),
-	 (if (toCheck.published == null) { S.error("You must provide a publish date"); false } else true),
-	 (if (toCheck.genre == null) { S.error("You must select a genre"); false } else true),
-	 (if (toCheck.author == null) { S.error("You must select an author"); false } else true)).forall(_ == true)
+    (if (toCheck.published == null) { S.error("You must provide a publish date"); false } else true),
+	  (if (toCheck.genre == null) { S.error("You must select a genre"); false } else true),
+	  (if (toCheck.author == null) { S.error("You must select an author"); false } else true)).forall(_ == true)
 
   def setDate (input : String, toSet : Book) {
     try {
@@ -75,15 +75,14 @@ class BookOps extends Loggable {
   def add (xhtml : NodeSeq) : NodeSeq = {
     def doAdd () =
       if (is_valid_Book_?(book)) {
-	try {
-	  Model.mergeAndFlush(book)
-	  redirectTo("list.html")
-	} catch {
-	  case ee : EntityExistsException => error("That book already exists.")
-	  case pe : PersistenceException => error("Error adding book"); logger.error("Book add failed", pe)
-	}
+        try {
+          Model.mergeAndFlush(book)
+          redirectTo("list.html")
+        } catch {
+          case ee : EntityExistsException => error("That book already exists.")
+          case pe : PersistenceException => error("Error adding book"); logger.error("Book add failed", pe)
+        }
       }
-
 
     // Hold a val here so that the closure holds it when we re-enter this method
     val current = book
@@ -93,12 +92,13 @@ class BookOps extends Loggable {
     val default = if (book.author != null) { Full(book.author.id.toString) } else { Empty }
 
     bind("book", xhtml,
-	 "id" -> SHtml.hidden(() => bookVar(current)),
-	 "title" -> SHtml.text(book.title, book.title = _),
-	 "published" -> SHtml.text(formatter.format(book.published), setDate(_, book)) % ("id" -> "published"),
-	 "genre" -> SHtml.select(Genre.getNameDescriptionList, (Box.legacyNullTest(book.genre).map(_.toString) or Full("")), choice => book.genre = Genre.valueOf(choice).getOrElse(null)),
-	 "author" -> SHtml.select(choices, default, {authId : String => book.author = Model.getReference(classOf[Author], authId.toLong)}),
-	 "save" -> SHtml.submit(?("Save"), doAdd))
+      "id" -> SHtml.hidden(() => bookVar(current)),
+      "title" -> SHtml.text(book.title, book.title = _),
+      "published" -> SHtml.text(formatter.format(book.published), setDate(_, book)) % ("id" -> "published"),
+      "genre" -> SHtml.select(Genre.getNameDescriptionList, (Box.legacyNullTest(book.genre).map(_.toString) or Full("")), choice => book.genre = Genre.valueOf(choice).getOrElse(null)),
+      "author" -> SHtml.select(choices, default, {authId : String => book.author = Model.getReference(classOf[Author], authId.toLong)}),
+      "save" -> SHtml.submit(?("Save"), doAdd)
+    )
   }
 
   def searchResults (xhtml : NodeSeq) : NodeSeq = BookOps.resultVar.is.flatMap(result =>
@@ -112,9 +112,7 @@ class BookOps extends Loggable {
     }
 
     bind("search", xhtml,
-	 "title" -> SHtml.text(title, x => title = x),
-	 "run" -> SHtml.submit(?("Search"), doSearch _))
+      "title" -> SHtml.text(title, x => title = x),
+      "run" -> SHtml.submit(?("Search"), doSearch _))
   }
-}
-}
 }

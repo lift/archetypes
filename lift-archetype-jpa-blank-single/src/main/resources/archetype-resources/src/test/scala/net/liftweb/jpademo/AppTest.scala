@@ -13,19 +13,19 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package net.liftweb.jpademo;
+package net.liftweb.jpademo
 
-import junit.framework._;
-import Assert._;
+import junit.framework._
+import Assert._
 
 object AppTest {
     def suite: Test = {
-        val suite = new TestSuite(classOf[AppTest]);
+        val suite = new TestSuite(classOf[AppTest])
         suite
     }
 
     def main(args : Array[String]) {
-        junit.textui.TestRunner.run(suite);
+        junit.textui.TestRunner.run(suite)
     }
 }
 
@@ -37,8 +37,7 @@ class AppTest extends TestCase("app") {
     /**
      * Rigourous Tests :-)
      */
-    def testOK() = assertTrue(true);
-    //def testKO() = assertTrue(false);
-
+    def testOK() = assertTrue(true)
+    //def testKO() = assertTrue(false)
 
 }

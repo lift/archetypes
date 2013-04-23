@@ -42,7 +42,7 @@
     <dependency>
       <groupId>org.eclipse.jetty</groupId>
       <artifactId>jetty-webapp</artifactId>
-      <version>8.1.8.v20121106</version>
+      <version>9.0.1.v20130408</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -52,7 +52,7 @@
       <plugin>
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-maven-plugin</artifactId>
-        <version>9.0.0.M4</version>
+        <version>9.0.1.v20130408</version>
         <configuration>
           <contextPath>/</contextPath>
           <scanIntervalSeconds>5</scanIntervalSeconds>

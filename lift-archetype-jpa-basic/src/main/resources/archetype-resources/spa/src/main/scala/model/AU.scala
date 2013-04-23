@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ${package} {
-package model {
+package ${package}
+package model
 
-import _root_.java.util.Currency;
-import _root_.java.util.Locale;
-import _root_.java.text.NumberFormat;
+import java.util.Currency
+import java.util.Locale
+import java.text.NumberFormat
 
 /* Australian Money */
 object AU extends CurrencyZone {
@@ -43,6 +43,4 @@ object AU extends CurrencyZone {
   val Cent = make(.01)
   val Dollar = make(1)
   val CurrencyUnit = Dollar
-}
-}
 }

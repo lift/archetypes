@@ -13,17 +13,17 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ${package} {
-package model {
+package ${package}
+package model
 
-import _root_.java.io.Serializable
-import _root_.java.sql.PreparedStatement
-import _root_.java.sql.ResultSet
-import _root_.java.sql.SQLException
-import _root_.java.sql.Types
+import java.io.Serializable
+import java.sql.PreparedStatement
+import java.sql.ResultSet
+import java.sql.SQLException
+import java.sql.Types
 
-import _root_.org.hibernate.HibernateException
-import _root_.org.hibernate.usertype.UserType
+import org.hibernate.HibernateException
+import org.hibernate.usertype.UserType
 
 /**
  * Helper class to translate enum for hibernate
@@ -70,7 +70,3 @@ abstract class EnumvType(val et: Enumeration with Enumv) extends UserType {
   override def replace(original: Object, target: Object, owner: Object) = original
 
 }
-
-}
-}
-

@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ${package} {
-package model {
+package ${package}
+package model
 
-import _root_.java.util.Date
+import java.util.Date
 
-import _root_.javax.persistence._
-import _root_.org.hibernate.annotations.Type
+import javax.persistence._
+import org.hibernate.annotations.Type
 
 
 /**
@@ -43,6 +43,4 @@ class Book {
 
   @ManyToOne(optional = false)
   var author : Author = _
-}
-}
 }
