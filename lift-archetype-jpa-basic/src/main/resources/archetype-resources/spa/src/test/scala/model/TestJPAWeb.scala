@@ -32,13 +32,13 @@ class TestJPAWeb {
       emf = Persistence.createEntityManagerFactory("jpaweb")
     } catch {
       case e: Exception => {
-	def printAndDescend(ex : Throwable) : Unit = {
-	  println(e.getMessage())
-	  if (ex.getCause() != null) {
-	    printAndDescend(ex.getCause())
-	  }
-	}
-	printAndDescend(e)
+      	def printAndDescend(ex : Throwable) : Unit = {
+      	  println(e.getMessage())
+      	  if (ex.getCause() != null) {
+      	    printAndDescend(ex.getCause())
+      	  }
+      	}
+      	printAndDescend(e)
       }
     }
   }
@@ -63,7 +63,7 @@ class TestJPAWeb {
 
     val book = new Book
     book.title = "Huh?"
-    book.published = new _root_.java.util.Date
+    book.published = new java.util.Date
     book.author = author
     book.genre = Genre.Mystery
 

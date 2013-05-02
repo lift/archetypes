@@ -13,7 +13,7 @@ object RunWebApp extends App {
   context.setServer(server)
   context.setWar("src/main/webapp")
 
-  val context0: ContextHandler = new ContextHandler();
+  val context0: ContextHandler = new ContextHandler()
   context0.setHandler(context)
   server.setHandler(context0)
 

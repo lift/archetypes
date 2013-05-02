@@ -6,8 +6,9 @@ import Helpers._
 
 import common._
 import http._
+import js.jquery._
 
-import ${package}.conroller._
+import ${package}.controller._
 import net.liftmodules.JQueryModule
 
 
@@ -18,7 +19,7 @@ import net.liftmodules.JQueryModule
 class Boot {
   def boot {
     // where to search snippet
-    LiftRules.addToPackages("code")
+    LiftRules.addToPackages("${package}")
 
     //Init the jQuery module, see http://liftweb.net/jquery for more information.
     LiftRules.jsArtifacts = JQueryArtifacts

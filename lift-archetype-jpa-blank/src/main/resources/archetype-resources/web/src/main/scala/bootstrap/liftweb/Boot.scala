@@ -17,8 +17,8 @@ package bootstrap.liftweb
 
 import java.util.Locale
 
-import net.liftweb.common.{Box,Empty,Full}
-import net.liftweb.util.{LoanWrapper,LogBoot}
+import net.liftweb.common.{Box,Empty,Full,Logger}
+import net.liftweb.util.{LoanWrapper}
 import net.liftweb.http._
 import net.liftweb.http.provider._
 import net.liftweb.sitemap._

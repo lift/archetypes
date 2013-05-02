@@ -16,7 +16,6 @@
 package ${package}
 package model
 
-import java.util.Currency
 import java.util.Locale
 import java.text.NumberFormat
 

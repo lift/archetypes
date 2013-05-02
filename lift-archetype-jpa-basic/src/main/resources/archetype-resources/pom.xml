@@ -76,7 +76,7 @@
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.0.11</version>
+      <version>1.0.12</version>
     </dependency>
 #elseif ($logBackend.equalsIgnoreCase("log4j"))
     <dependency>
@@ -99,7 +99,7 @@
     <dependency>
       <groupId>org.apache.derby</groupId>
       <artifactId>derby</artifactId>
-      <version>10.9.1.0</version>
+      <version>10.10.1.1</version>
       <optional>true</optional>
     </dependency>
     <dependency>

@@ -24,6 +24,7 @@ import java.sql.Types
 
 import org.hibernate.HibernateException
 import org.hibernate.usertype.UserType
+import org.hibernate.engine.spi.SessionImplementor
 
 /**
  * Helper class to translate money amount for hibernate
@@ -32,26 +33,26 @@ abstract class CurrencyUserType[CZ <: CurrencyZone](cz: CZ) extends UserType {
 
   type MyCurrency = CZ#Currency
 
-  val SQL_TYPES = Array(Types.NUMERIC.asInstanceOf[Int])
+  val SQL_TYPES = Array(Types.NUMERIC)
 
   override def sqlTypes() = SQL_TYPES
 
-  override def returnedClass = cz.CurrencyUnit.getClass
+  override def returnedClass = cz.getClass
 
   override def equals(x: Object, y: Object): Boolean = {
-    if (x == null || y == null) return false
-    else return x == y
+    if (x == null || y == null) false
+    else x == y
   }
 
   override def hashCode(x: Object) = x.hashCode
 
-  override def nullSafeGet(resultSet: ResultSet, names: Array[String], owner: Object): Object = {
+  override def nullSafeGet(resultSet: ResultSet, names: Array[String], sessionImplementor: SessionImplementor, owner: Object) : Object = {
     val dollarVal = resultSet.getBigDecimal(names(0))
-    if (resultSet.wasNull()) return cz.make(0)
-    else return cz.make(new BigDecimal(dollarVal))
+    if (resultSet.wasNull()) cz.make(0)
+    else cz.make(new BigDecimal(dollarVal))
   }
 
-  override def nullSafeSet(statement: PreparedStatement, value: Object, index: Int): Unit = {
+  override def nullSafeSet(statement: PreparedStatement, value: Object, index: Int, sessionImplementor: SessionImplementor) {
     if (value == null) {
       statement.setNull(index, Types.NUMERIC)
     } else {
@@ -62,7 +63,7 @@ abstract class CurrencyUserType[CZ <: CurrencyZone](cz: CZ) extends UserType {
 
   override def deepCopy(value: Object): Object = value
 
-  override def isMutable() = false
+  override def isMutable = false
 
   override def disassemble(value: Object) = value.asInstanceOf[Serializable]
 

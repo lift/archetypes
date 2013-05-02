@@ -16,20 +16,21 @@
 package ${package}
 package snippet
 
-import java.text.{ParseException,SimpleDateFormat}
+import java.text.{SimpleDateFormat, ParseException}
 
 import scala.xml.{NodeSeq,Text}
 
 import net.liftweb.http.{RequestVar,S,SHtml}
+import net.liftweb.http.js.JsCmds.Run
 import net.liftweb.common.{Box,Empty,Full, Loggable}
-import net.liftweb.util.{Helpers}
 import S._
-import Helpers._
+import net.liftweb.util.Helpers._
 
 import javax.persistence.{EntityExistsException,PersistenceException}
 
 import ${package}.model._
 import Model._
+
 
 // Make an object so that other pages can access (ie Authors)
 object BookOps {
@@ -38,18 +39,18 @@ object BookOps {
 }
 
 class BookOps extends Loggable {
-  val formatter = new _root_.java.text.SimpleDateFormat("yyyyMMdd")
+  val formatter = new SimpleDateFormat("dd/MM/yyyy", S.locale)
 
   def list (xhtml : NodeSeq) : NodeSeq = {
     val books = Model.createNamedQuery[Book]("findAllBooks").getResultList()
 
     books.flatMap(book =>
       bind("book", xhtml,
-	   "title" -> Text(book.title),
-	   "published" -> Text(formatter.format(book.published)),
-	   "genre" -> Text(if (book.genre != null) book.genre.toString else ""),
-	   "author" -> Text(book.author.name),
-	   "edit" -> SHtml.link("add.html", () => bookVar(book), Text(?("Edit")))))
+     "title" -> Text(book.title),
+     "published" -> Text(formatter.format(book.published)),
+     "genre" -> Text(if (book.genre != null) book.genre.toString else ""),
+     "author" -> Text(book.author.name),
+     "edit" -> SHtml.link("add.html", () => bookVar(book), Text(?("Edit")))))
   }
 
   // Set up a requestVar to track the book object for edits and adds
@@ -60,8 +61,8 @@ class BookOps extends Loggable {
   def is_valid_Book_? (toCheck : Book) : Boolean =
     List((if (toCheck.title.length == 0) { S.error("You must provide a title"); false } else true),
     (if (toCheck.published == null) { S.error("You must provide a publish date"); false } else true),
-	  (if (toCheck.genre == null) { S.error("You must select a genre"); false } else true),
-	  (if (toCheck.author == null) { S.error("You must select an author"); false } else true)).forall(_ == true)
+    (if (toCheck.genre == null) { S.error("You must select a genre"); false } else true),
+    (if (toCheck.author == null) { S.error("You must select an author"); false } else true)).forall(_ == true)
 
   def setDate (input : String, toSet : Book) {
     try {
@@ -91,15 +92,19 @@ class BookOps extends Loggable {
     val choices = authors.map(author => (author.id.toString -> author.name)).toList
     val default = if (book.author != null) { Full(book.author.id.toString) } else { Empty }
 
+    S.appendJs(calendarPicker)
+
     bind("book", xhtml,
       "id" -> SHtml.hidden(() => bookVar(current)),
       "title" -> SHtml.text(book.title, book.title = _),
       "published" -> SHtml.text(formatter.format(book.published), setDate(_, book)) % ("id" -> "published"),
-      "genre" -> SHtml.select(Genre.getNameDescriptionList, (Box.legacyNullTest(book.genre).map(_.toString) or Full("")), choice => book.genre = Genre.valueOf(choice).getOrElse(null)),
+      "genre" -> SHtml.select(Genre.getNameDescriptionList, (Box.legacyNullTest(book.genre).map(_.toString) or Full("")), choice => book.genre = Genre.values.find(_.toString == choice).getOrElse(null)),
       "author" -> SHtml.select(choices, default, {authId : String => book.author = Model.getReference(classOf[Author], authId.toLong)}),
       "save" -> SHtml.submit(?("Save"), doAdd)
     )
   }
+
+  private def calendarPicker = Run("$('#published').datePicker({dateFormat: '%s'});".format(formatter.toLocalizedPattern))
 
   def searchResults (xhtml : NodeSeq) : NodeSeq = BookOps.resultVar.is.flatMap(result =>
     bind("result", xhtml, "title" -> Text(result.title), "author" -> Text(result.author.name)))

@@ -17,8 +17,8 @@ package bootstrap.liftweb
 
 import java.util.Locale
 
-import net.liftweb.common.{Box,Empty,Full}
-import net.liftweb.util.{LoanWrapper,LogBoot}
+import net.liftweb.common.{Box,Empty,Full,Logger}
+import net.liftweb.util.{LoanWrapper}
 import net.liftweb.http._
 import net.liftweb.http.provider._
 import net.liftweb.sitemap._
@@ -32,19 +32,6 @@ import S.?
   */
 class Boot {
   def boot {
-    LogBoot.defaultProps =
-      """<?xml version="1.0" encoding="UTF-8" ?>
-      <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
-      <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
-      <appender name="appender" class="org.apache.log4j.ConsoleAppender">
-      <layout class="org.apache.log4j.SimpleLayout"/>
-      </appender>
-      <root>
-      <priority value ="DEBUG"/>
-      <appender-ref ref="appender"/>
-      </root>
-      </log4j:configuration>
-      """
 
     // where to search snippet
     LiftRules.addToPackages("${package}")

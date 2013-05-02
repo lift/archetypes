@@ -39,7 +39,7 @@ class Boot {
     Schemifier.schemify(true, Schemifier.infoF _, User)
 
     // where to search snippet
-    LiftRules.addToPackages("code")
+    LiftRules.addToPackages("${package}")
 
     // Build SiteMap
     def sitemap = SiteMap(

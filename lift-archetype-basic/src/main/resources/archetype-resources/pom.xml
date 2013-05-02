@@ -65,11 +65,16 @@
       <artifactId>lift-mapper_$scalaVersion</artifactId>
       <version>$liftVersion</version>
     </dependency>
+    <dependency>
+      <groupId>net.liftmodules</groupId>
+      <artifactId>lift-jquery-module_$scalaVersion</artifactId>
+      <version>${liftVersion}-2.0</version>
+    </dependency>
 #if ($logBackend.equalsIgnoreCase("logback"))
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.0.11</version>
+      <version>1.0.12</version>
     </dependency>
 #elseif ($logBackend.equalsIgnoreCase("log4j"))
     <dependency>
@@ -110,7 +115,7 @@
     <dependency>
       <groupId>org.eclipse.jetty</groupId>
       <artifactId>jetty-webapp</artifactId>
-      <version>9.0.1.v20130408</version>
+      <version>8.1.10.v20130312</version>
       <scope>test</scope>
     </dependency>
     <!-- for LiftConsole -->
@@ -174,9 +179,9 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.eclipse.jetty</groupId>
-        <artifactId>jetty-maven-plugin</artifactId>
-        <version>9.0.1.v20130408</version>
+        <groupId>org.mortbay.jetty</groupId>
+        <artifactId>maven-jetty-plugin</artifactId>
+        <version>6.1.26</version>
         <configuration>
           <contextPath>/</contextPath>
           <scanIntervalSeconds>5</scanIntervalSeconds>

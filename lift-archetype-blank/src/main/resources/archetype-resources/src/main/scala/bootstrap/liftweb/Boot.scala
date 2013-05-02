@@ -19,7 +19,7 @@ import net.liftweb.http.js.jquery._
 class Boot {
   def boot {
     // where to search snippet
-    LiftRules.addToPackages("code")
+    LiftRules.addToPackages("${package}")
 
     // Build SiteMap
     val entries = List(

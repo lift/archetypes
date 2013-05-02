@@ -4,7 +4,7 @@ package controller
 import net.liftweb.http._
 import net.liftweb.util._
 import java.util.Date
-import code.lib._
+import ${package}.lib._
 import Helpers._
 
 /**

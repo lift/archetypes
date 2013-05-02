@@ -31,5 +31,5 @@ class Author {
   var name : String = ""
 
   @OneToMany(mappedBy = "author", targetEntity = classOf[Book])
-  var books : _root_.java.util.Set[Book] = new _root_.java.util.HashSet[Book]()
+  var books : java.util.Set[Book] = new java.util.HashSet[Book]()
 }
