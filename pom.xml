@@ -31,6 +31,15 @@
   -->
 
   <!--
+    ~ Sonatype OSS parent (for publishing to maven central)
+  -->
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+  </parent>
+
+  <!--
     ~ The Basics
   -->
   <groupId>net.liftweb</groupId>
@@ -89,21 +98,22 @@
     <url>http://hudson.scala-tools.org/job/lift-archetypes/</url>
     <!-- <notifiers/> -->
   </ciManagement>
+
   <distributionManagement>
     <repository>
-      <id>nexus.scala-tools.org</id>
-      <name>Scala-Tools Distribution Repository for Releases</name>
-      <url>http://nexus.scala-tools.org/content/repositories/releases</url>
+      <id>ossrh-staging</id>
+      <url>http://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+      <layout>default</layout>
     </repository>
     <snapshotRepository>
-      <id>nexus.scala-tools.org</id>
-      <name>Scala-Tools Distribution Repository for Snapshots</name>
-      <url>http://nexus.scala-tools.org/content/repositories/snapshots</url>
-      <uniqueVersion>false</uniqueVersion>
+      <id>ossrh-snapshots</id>
+      <url>http://oss.sonatype.org/content/repositories/snapshots</url>
+      <layout>default</layout>
     </snapshotRepository>
     <!-- Site omitted, each project/profile must provide their own -->
     <!--<site />-->
   </distributionManagement>
+  
   <properties>
     <!-- Common plugin settings -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -215,6 +225,34 @@
   <!--
     ~ Profile Settings
   -->
-  <!-- <profiles/> -->
+  <!-- mvn -Darguments="-Dgpg.passphrase=xxxx" release:perform -->
+  <profiles>
+    <profile>
+      <activation>
+        <property>
+          <name>performRelease</name>
+          <value>true</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.4</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
 </project>
