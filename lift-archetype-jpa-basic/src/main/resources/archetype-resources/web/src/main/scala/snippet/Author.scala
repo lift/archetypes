@@ -13,19 +13,19 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ${package} {
-package snippet {
+package ${package}
+package snippet
 
-import _root_.scala.xml.{NodeSeq,Text}
+import scala.xml.{NodeSeq,Text}
 
-import _root_.net.liftweb._
+import net.liftweb._
 import http._
 import S._
 import common._
 import util._
 import Helpers._
 
-import _root_.javax.persistence.{EntityExistsException,PersistenceException}
+import javax.persistence.{EntityExistsException,PersistenceException}
 
 import ${package}.model._
 import Model._
@@ -36,11 +36,11 @@ class AuthorOps extends Loggable {
 
     authors.flatMap(author =>
       bind("author", xhtml,
-	   "name" -> Text(author.name),
-	   "count" -> SHtml.link("/books/search.html", {() =>
-	     BookOps.resultVar(Model.createNamedQuery[Book]("findBooksByAuthor", "id" ->author.id).getResultList().toList)
-	     }, Text(author.books.size().toString)),
-	   "edit" -> SHtml.link("add.html", () => authorVar(author), Text(?("Edit")))))
+        "name" -> Text(author.name),
+        "count" -> SHtml.link("/books/search.html", {() =>
+          BookOps.resultVar(Model.createNamedQuery[Book]("findBooksByAuthor", "id" ->author.id).getResultList().toList)
+        }, Text(author.books.size().toString)),
+        "edit" -> SHtml.link("add.html", () => authorVar(author), Text(?("Edit")))))
   }
 
   // Set up a requestVar to track the author object for edits and adds
@@ -50,15 +50,15 @@ class AuthorOps extends Loggable {
   def add (xhtml : NodeSeq) : NodeSeq = {
     def doAdd () = {
       if (author.name.length == 0) {
-	error("emptyAuthor", "The author's name cannot be blank")
+        error("emptyAuthor", "The author's name cannot be blank")
       } else {
-	try {
-	  Model.mergeAndFlush(author)
-	  redirectTo("list.html")
-	} catch {
-	  case ee : EntityExistsException => error("Author already exists")
-	  case pe : PersistenceException => error("Error adding author"); logger.error("Error adding author", pe)
-	}
+        try {
+          Model.mergeAndFlush(author)
+          redirectTo("list.html")
+        } catch {
+          case ee : EntityExistsException => error("Author already exists")
+          case pe : PersistenceException => error("Error adding author"); logger.error("Error adding author", pe)
+        }
       }
     }
 
@@ -66,10 +66,8 @@ class AuthorOps extends Loggable {
     val currentId = author.id
 
     bind("author", xhtml,
-	 "id" -> SHtml.hidden(() => author.id = currentId),
-	 "name" -> SHtml.text(author.name, author.name = _),
-	 "submit" -> SHtml.submit(?("Save"), doAdd))
+      "id" -> SHtml.hidden(() => author.id = currentId),
+      "name" -> SHtml.text(author.name, author.name = _),
+      "submit" -> SHtml.submit(?("Save"), doAdd))
   }
-}
-}
 }

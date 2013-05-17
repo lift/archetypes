@@ -15,14 +15,14 @@
  */
 package bootstrap.liftweb
 
-import _root_.java.util.Locale
+import java.util.Locale
 
-import _root_.net.liftweb.common.{Box,Empty,Full}
-import _root_.net.liftweb.util.{LoanWrapper,LogBoot}
-import _root_.net.liftweb.http._
-import _root_.net.liftweb.http.provider._
-import _root_.net.liftweb.sitemap._
-import _root_.net.liftweb.sitemap.Loc._
+import net.liftweb.common.{Box,Empty,Full,Logger}
+import net.liftweb.util.{LoanWrapper}
+import net.liftweb.http._
+import net.liftweb.http.provider._
+import net.liftweb.sitemap._
+import net.liftweb.sitemap.Loc._
 import ${package}.model._
 import S.?
 

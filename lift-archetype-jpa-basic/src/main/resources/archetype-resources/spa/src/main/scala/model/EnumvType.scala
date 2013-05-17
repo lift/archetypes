@@ -13,17 +13,18 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ${package} {
-package model {
+package ${package}
+package model
 
-import _root_.java.io.Serializable
-import _root_.java.sql.PreparedStatement
-import _root_.java.sql.ResultSet
-import _root_.java.sql.SQLException
-import _root_.java.sql.Types
+import java.io.Serializable
+import java.sql.PreparedStatement
+import java.sql.ResultSet
+import java.sql.SQLException
+import java.sql.Types
 
-import _root_.org.hibernate.HibernateException
-import _root_.org.hibernate.usertype.UserType
+import org.hibernate.HibernateException
+import org.hibernate.usertype.UserType
+import org.hibernate.engine.spi.SessionImplementor
 
 /**
  * Helper class to translate enum for hibernate
@@ -32,25 +33,21 @@ abstract class EnumvType(val et: Enumeration with Enumv) extends UserType {
 
   val SQL_TYPES = Array({Types.VARCHAR})
 
-  override def sqlTypes() = SQL_TYPES
+  override def sqlTypes = SQL_TYPES
 
   override def returnedClass = classOf[et.Value]
 
-  override def equals(x: Object, y: Object): Boolean = {
-    return x == y
-  }
+  override def equals(x: Object, y: Object): Boolean = x == y
 
   override def hashCode(x: Object) = x.hashCode
 
-  override def nullSafeGet(resultSet: ResultSet, names: Array[String], owner: Object): Object = {
+  override def nullSafeGet(resultSet: ResultSet, names: Array[String], sessionImplementor: SessionImplementor, owner: Object) : Object = {
     val value = resultSet.getString(names(0))
-    if (resultSet.wasNull()) return null
-    else {
-      return et.valueOf(value).getOrElse(null)
-    }
+    if (resultSet.wasNull()) null
+    else et.values.find(_.toString == value).getOrElse(null)
   }
 
-  override def nullSafeSet(statement: PreparedStatement, value: Object, index: Int): Unit = {
+  override def nullSafeSet(statement: PreparedStatement, value: Object, index: Int, sessionImplementor: SessionImplementor) {
     if (value == null) {
       statement.setNull(index, Types.VARCHAR)
     } else {
@@ -61,7 +58,7 @@ abstract class EnumvType(val et: Enumeration with Enumv) extends UserType {
 
   override def deepCopy(value: Object): Object = value
 
-  override def isMutable() = false
+  override def isMutable = false
 
   override def disassemble(value: Object) = value.asInstanceOf[Serializable]
 
@@ -70,7 +67,3 @@ abstract class EnumvType(val et: Enumeration with Enumv) extends UserType {
   override def replace(original: Object, target: Object, owner: Object) = original
 
 }
-
-}
-}
-

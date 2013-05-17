@@ -4,4 +4,4 @@ mvn install
 cd web
 mvn jetty:run
 
-Then point your favorite browser to http://localhost:9090/
+Then point your favorite browser to http://localhost:8080/

@@ -13,15 +13,12 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ${package} {
-package model {
+package ${package}
+package model
 
-import _root_.org.scala_libs.jpa.LocalEMF
-import _root_.net.liftweb.jpa.RequestVarEM
+import org.scala_libs.jpa.LocalEMF
+import net.liftweb.jpa.RequestVarEM
 
 /* This object is left as a placeholder. Please modify to match your
  * configuration: */
 object Model extends LocalEMF("jpaweb") with RequestVarEM
-
-}
-}

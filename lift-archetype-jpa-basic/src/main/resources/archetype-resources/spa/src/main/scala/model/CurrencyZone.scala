@@ -13,12 +13,11 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package ${package} {
-package model {
+package ${package}
+package model
 
-import _root_.java.util.Currency
-import _root_.java.util.Locale
-import _root_.java.text.NumberFormat
+import java.util.Locale
+import java.text.NumberFormat
 
 /* currency factory*/
 abstract class CurrencyZone {
@@ -41,7 +40,7 @@ abstract class CurrencyZone {
     def -(that: Currency): Currency = this - that
 
     def /(that: Currency): Currency =
-    make(new BigDecimal(this.amount.bigDecimal.divide(that.amount.bigDecimal, scale, _root_.java.math.BigDecimal.ROUND_HALF_UP)) )
+      make(new BigDecimal(this.amount.bigDecimal.divide(that.amount.bigDecimal, scale, java.math.BigDecimal.ROUND_HALF_UP)))
 
     override def toString = format("", numberOfFractionDigits)
 
@@ -51,21 +50,18 @@ abstract class CurrencyZone {
       var moneyValue = amount
       if (amount == null) moneyValue = 0
 
-      moneyValue = moneyValue.setScale(numberOfFractionDigits, BigDecimal.RoundingMode.HALF_UP);
-      val numberFormat = NumberFormat.getInstance(auLocale);
-      numberFormat.setMinimumFractionDigits(numberOfFractionDigits);
-      numberFormat.setMaximumFractionDigits(numberOfFractionDigits);
-      if (moneyValue.doubleValue() < 0) return "-"+currencySymbol+numberFormat.format(moneyValue.abs.doubleValue());
-      else return currencySymbol+numberFormat.format(moneyValue.doubleValue());
+      moneyValue = moneyValue.setScale(numberOfFractionDigits, BigDecimal.RoundingMode.HALF_UP)
+      val numberFormat = NumberFormat.getInstance(auLocale)
+      numberFormat.setMinimumFractionDigits(numberOfFractionDigits)
+      numberFormat.setMaximumFractionDigits(numberOfFractionDigits)
+      if (moneyValue.doubleValue() < 0) "-"+currencySymbol+numberFormat.format(moneyValue.abs.doubleValue())
+      else currencySymbol+numberFormat.format(moneyValue.doubleValue())
     }
 
     def get: String = get(numberOfFractionDigits)
 
-    def get(numberOfFractionDigits: Int): String = format("", numberOfFractionDigits).replaceAll(",", "");
+    def get(numberOfFractionDigits: Int): String = format("", numberOfFractionDigits).replaceAll(",", "")
 
   }
   val CurrencyUnit: Currency
-}
-
-}
 }

@@ -1,9 +1,9 @@
-import _root_.org.mortbay.jetty.Connector
-import _root_.org.mortbay.jetty.Server
-import _root_.org.mortbay.jetty.webapp.WebAppContext
-import org.mortbay.jetty.nio._
+import org.eclipse.jetty.server.handler.ContextHandler
+import org.eclipse.jetty.server.nio.SelectChannelConnector
+import org.eclipse.jetty.server.{Handler, Server}
+import org.eclipse.jetty.webapp.WebAppContext
 
-object RunWebApp extends Application {
+object RunWebApp extends App {
   val server = new Server
   val scc = new SelectChannelConnector
   scc.setPort(8080)
@@ -11,10 +11,11 @@ object RunWebApp extends Application {
 
   val context = new WebAppContext()
   context.setServer(server)
-  context.setContextPath("/")
   context.setWar("src/main/webapp")
 
-  server.addHandler(context)
+  val context0: ContextHandler = new ContextHandler()
+  context0.setHandler(context)
+  server.setHandler(context0)
 
   try {
     println(">>> STARTING EMBEDDED JETTY SERVER, PRESS ANY KEY TO STOP")
@@ -25,7 +26,7 @@ object RunWebApp extends Application {
     server.stop()
     server.join()
   } catch {
-    case exc : Exception => {
+    case exc: Exception => {
       exc.printStackTrace()
       System.exit(100)
     }

@@ -1,17 +1,17 @@
-package ${package} {
-package snippet {
+package ${package} 
+package snippet 
 
-import _root_.scala.xml.{NodeSeq, Text}
-import _root_.net.liftweb.util._
-import _root_.net.liftweb.common._
-import _root_.java.util.Date
+import scala.xml.{NodeSeq, Text}
+import net.liftweb.util._
+import net.liftweb.common._
+import java.util.Date
 import ${package}.lib._
 import Helpers._
 
 class HelloWorld {
   lazy val date: Box[Date] = DependencyFactory.inject[Date] // inject the date
 
-  // bind the date into the element with id "time"
+  // replace the contents of the element with id "time" with the date
   def howdy = "#time *" #> date.map(_.toString)
 
   /*
@@ -21,5 +21,3 @@ class HelloWorld {
    */
 }
 
-}
-}
