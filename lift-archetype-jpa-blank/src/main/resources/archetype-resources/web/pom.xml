@@ -3,12 +3,12 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  #set($scala_version_unevaled = '\${scala.version}')
-  #set($scala_version = '${scala.version}')
-  #set($lift_version = '${lift.version}')
+#set($scala_version_unevaled = '\${scala.version}')
+#set($scala_major_minor_version_unevaled = '\${scala.majorMinorVersion}')
+#set($lift_version_unevaled = '\${lift.version}')
 
-  #set($spa_suffix = '-spa')
-  #set($web_suffix = '-web')
+#set($spa_suffix = '-spa')
+#set($web_suffix = '-web')
 
   <modelVersion>4.0.0</modelVersion>
   <parent>
@@ -29,8 +29,12 @@
     </dependency>
     <dependency>
       <groupId>net.liftweb</groupId>
-      <artifactId>lift-jpa_$scalaVersion</artifactId>
-      <version>$liftVersion</version>
+#if ($scalaVersion.compareTo("2.10") < 0)
+      <artifactId>lift-jpa_${scala.version}</artifactId>
+#else
+      <artifactId>lift-jpa_${scala.majorMinorVersion}</artifactId>
+#end
+      <version>$lift_version_unevaled</version>
     </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
