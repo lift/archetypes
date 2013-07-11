@@ -62,7 +62,7 @@ abstract class EnumvType(val et: Enumeration with Enumv) extends UserType {
 
   override def disassemble(value: Object) = value.asInstanceOf[Serializable]
 
-  override def assemble(cached: Serializable, owner: Object): Serializable = cached
+  override def assemble(cached: Serializable, owner: Object): Object = cached.asInstanceOf[Object]
 
   override def replace(original: Object, target: Object, owner: Object) = original
 

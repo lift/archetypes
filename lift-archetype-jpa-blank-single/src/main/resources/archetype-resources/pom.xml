@@ -3,10 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  #set($scala_version_unevaled = '\${scala.version}')
-  #set($project_basedir = '\${project.basedir}')
-  #set($project_build_sourceEncoding_unevaled = '\${project.build.sourceEncoding}')
-  #set($project_build_directory_unevaled = '\${project.build.directory}')
+#set($scala_pre_210 = $scalaVersion.compareTo("2.10") < 0)
+#set($scala_version_unevaled = '\${scala.version}')
+#set($scala_major_minor_version_unevaled = '\${scala.majorMinorVersion}')
+#set($lift_version_unevaled = '\${lift.version}')
+#set($lift_major_minor_version_unevaled = '\${lift.majorMinorVersion}')
+#set($project_basedir = '\${project.basedir}')
+#set($project_build_sourceEncoding_unevaled = '\${project.build.sourceEncoding}')
+#set($project_build_directory_unevaled = '\${project.build.directory}')
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>$groupId</groupId>
@@ -16,7 +20,11 @@
   <name>$artifactId Project</name>
   <inceptionYear>2010</inceptionYear>
   <properties>
+    <lift.version>$liftVersion</lift.version>
+    <!-- <lift.majorMinorVersion> @see regex-property executions </lift.majorMinorVersion> -->
     <scala.version>$scalaVersion</scala.version>
+    <!-- <scala.majorMinorVersion> @see regex-property executions </scala.majorMinorVersion> -->
+
     <!-- Common plugin settings -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>$project_build_sourceEncoding_unevaled</project.reporting.outputEncoding>
@@ -63,8 +71,12 @@
   <dependencies>
     <dependency>
       <groupId>net.liftweb</groupId>
-      <artifactId>lift-jpa_$scalaVersion</artifactId>
-      <version>$liftVersion</version>
+#if ($scala_pre_210)
+      <artifactId>lift-jpa_${scala.version}</artifactId>
+#else
+      <artifactId>lift-jpa_${scala.majorMinorVersion}</artifactId>
+#end
+      <version>$lift_version_unevaled</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -153,13 +165,13 @@
         <artifactId>maven-scala-plugin</artifactId>
         <version>2.15.2</version>
         <configuration>
+          <checkMultipleScalaVersions>#if($scala_pre_210)true#{else}false#end</checkMultipleScalaVersions>
           <charset>$project_build_sourceEncoding_unevaled</charset>
           <jvmArgs>
             <jvmArg>-Xmx1024m</jvmArg>
             <jvmArg>-DpackageLinkDefs=file://$project_build_directory_unevaled/packageLinkDefs.properties</jvmArg>
           </jvmArgs>
           <args>
-            <!-- arg>-unchecked</arg -->
             <arg>-deprecation</arg>
           </args>
         </configuration>
@@ -261,6 +273,39 @@
             <classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
           </classpathContainers>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>1.8</version>
+        <executions>
+          <execution>
+            <id>parse-lift-major-minor-version</id>
+            <goals>
+              <goal>regex-property</goal>
+            </goals>
+            <configuration>
+              <name>lift.majorMinorVersion</name>
+              <value>${lift_version_unevaled}</value>
+              <regex>^([0-9]+)\.([0-9]+).*$</regex>
+              <replacement>$1.$2</replacement>
+              <failIfNoMatch>true</failIfNoMatch>
+            </configuration>
+          </execution>
+          <execution>
+            <id>parse-scala-major-minor-version</id>
+            <goals>
+              <goal>regex-property</goal>
+            </goals>
+            <configuration>
+              <name>scala.majorMinorVersion</name>
+              <value>${scala_version_unevaled}</value>
+              <regex>^([0-9]+)\.([0-9]+).*$</regex>
+              <replacement>$1.$2</replacement>
+              <failIfNoMatch>true</failIfNoMatch>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
